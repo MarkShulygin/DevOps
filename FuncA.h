@@ -2,8 +2,8 @@
 #define FUNCA_H
 
 class FuncA {
-	public:
-		double calculate(int N, double x);
+public:
+    double calculate(int N, double x);
 };
 
 #endif
