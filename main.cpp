@@ -1,4 +1,4 @@
-#include "FuncA.h"
+;#include "FuncA.h"
 #include <iostream>
 
 int main() {
@@ -7,4 +7,4 @@ int main() {
 	double x = 0.5;
 	std::cout << f.calculate(N,x) << std::endl;
 	return 0;
-}
+};
