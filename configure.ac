@@ -1,0 +1,6 @@
+AC_INIT([arcCos], [1.0])
+AM_CONFIG_AUX_DIR([build-aux])
+AM_INIT_AUTOMAKE
+AC_PROG_CXX
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
