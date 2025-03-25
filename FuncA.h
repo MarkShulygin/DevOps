@@ -4,6 +4,6 @@
 class FuncA {
 	public:
 		double calculate();
-}
+};
 
 #endif
