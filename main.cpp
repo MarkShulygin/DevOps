@@ -1,4 +1,4 @@
-;#include "FuncA.h"
+#include "FuncA.h"
 #include <iostream>
 
 int main() {
