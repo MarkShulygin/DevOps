@@ -21,3 +21,5 @@ jobs:
         run: ./configure
       - name: Build the project
         run: make
+      - name: create tar doc
+        run: make dist
