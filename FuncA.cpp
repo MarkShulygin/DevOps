@@ -10,4 +10,4 @@ double FuncA::calculate() {
 		sum += (numerator / denominator) * pow(x, 2 * n + 1);
 	}
 	return (M_PI / 2) - sum;
-}
+};
