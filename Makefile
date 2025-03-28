@@ -316,6 +316,8 @@ top_srcdir = .
 AUTOMAKE_OPTIONS = foreign
 devops_SOURCES = main.cpp FuncA.cpp FuncA.h
 dist_man_MANS = devops.1
+CTRLF_DIR = $(CURDIR)/deb/DEBIAN
+CTRLF_NAME = $(CTRLF_DIR)/control
 all: all-am
 
 .SUFFIXES:
@@ -840,7 +842,17 @@ uninstall-man: uninstall-man1
 
 .PHONY: deb
 deb:
+	mkdir -p $(CTRLF_DIR)
+	echo Package: $(PACKAGE) > $(CTRLF_NAME)
+	echo Version: $(VERSION) >> $(CTRLF_NAME)
+	echo Architecture: all >> $(CTRLF_NAME)
+	echo Maintainer: $(PACKAGE_BUGREPORT) >> $(CTRLF_NAME)
+	echo -n "Description:" >> $(CTRLF_NAME)
+	cat devops.1 >> $(CTRLF_NAME)
 	make DESTDIR=$(CURDIR)/deb install
+
+debug:
+	$(foreach v, $(.VARIABLES), $(info $(v)=$($(v)))) 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

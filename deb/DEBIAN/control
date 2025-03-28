@@ -1,0 +1,5 @@
+Package: devops
+Version: 0.1
+Architecture: all
+Maintainer: mark.shulyhin@lll.kpi.ua
+Description:The software complates math calculations
