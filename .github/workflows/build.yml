@@ -2,9 +2,9 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ "branchAutomake" ]
+    branches: [ "branchAutoPackage" ]
   pull_request:
-    branches: [ "branchAutomake" ]
+    branches: [ "branchAutoPackage" ]
 
 jobs:
   build:
@@ -21,5 +21,5 @@ jobs:
         run: ./configure
       - name: Build the project
         run: make
-      - name: create tar doc
-        run: make dist
+      - name: create deb package
+        run: dpkg-deb --build deb
