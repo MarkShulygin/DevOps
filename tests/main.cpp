@@ -2,7 +2,7 @@
 #include <iostream>
 #include "../FuncA.h"
 
-int main(int argc, char* argv[])
+int main()
 {
 	FuncA devops;
 	double result = devops.calculate();
