@@ -316,6 +316,7 @@ top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
 devops_SOURCES = main.cpp FuncA.cpp FuncA.h
 dist_man_MANS = devops.1
+SUBDIR = tests
 CTRLF_DIR = $(CURDIR)/deb/DEBIAN
 CTRLF_NAME = $(CTRLF_DIR)/control
 all: all-am
@@ -840,7 +841,7 @@ uninstall-man: uninstall-man1
 .PRECIOUS: Makefile
 
 
-.PHONY: deb
+.PHONY: deb debug
 deb:
 	mkdir -p $(CTRLF_DIR)
 	echo Package: $(PACKAGE) > $(CTRLF_NAME)

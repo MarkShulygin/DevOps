@@ -3,10 +3,12 @@ bin_PROGRAMS = devops
 devops_SOURCES = main.cpp FuncA.cpp FuncA.h
 dist_man_MANS = devops.1
 
+SUBDIR = tests
+
 CTRLF_DIR=$(CURDIR)/deb/DEBIAN
 CTRLF_NAME=$(CTRLF_DIR)/control
 
-.PHONY: deb
+.PHONY: deb debug
 deb:
 	mkdir -p $(CTRLF_DIR)
 	echo Package: $(PACKAGE) > $(CTRLF_NAME)
