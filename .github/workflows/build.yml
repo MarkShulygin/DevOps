@@ -22,4 +22,4 @@ jobs:
         run: make
 
       - name: Autotest
-        run: make check
+        run: cd ./tests && make check
