@@ -5,7 +5,7 @@
 int main(int argc, char* argv[])
 {
 	FuncA devops;
-	double result = func.calculate();
+	double result = devops.calculate();
 
 	if (std::abs(result) < 1)
 	{
