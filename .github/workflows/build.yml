@@ -2,9 +2,11 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ "branchAutomake" ]
+    branches: [ "branchAutoTest" ]
   pull_request:
-    branches: [ "branchAutomake" ]
+    branches: [ "branchAutoTest" ]
+  workflow_dispatch:
+    branches: [ "branchAutoTest" ]
 
 jobs:
   build:
@@ -13,13 +15,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Install dependencies
-        run: sudo apt-get install -y automake autoconf g++ make
-      - name: Generate configure script and Makefile.in
-        run: aclocal && automake --add-missing && autoconf
-      - name: Run configure script
+      - name: ./configure
         run: ./configure
-      - name: Build the project
+
+      - name: make
         run: make
-      - name: create tar doc
-        run: make dist
+
+      - name: Autotest
+        run: ./tests/make check
