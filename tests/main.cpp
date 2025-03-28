@@ -1,14 +1,17 @@
 #include <stdio.h>
+#include <iostream>
 #include "../FuncA.h"
 
 int main(int argc, char* argv[])
 {
 	FuncA devops;
+	double result = func.calculate();
 
-	FuncA.AddString("The first string");
-
-	if (devops.aString.size() == 1)
-		return 0;
-
-	return 1;
+	if (std::abs(result) < 1)
+	{
+		std::cout << "Calculated succesfully";
+	} else {
+		std::cout << "Calculations failed";
+	}
+	return 0;
 }
