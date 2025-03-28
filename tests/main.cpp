@@ -5,7 +5,7 @@
 int main()
 {
 	FuncA devops;
-	double result = devops.calculate(int, double);
+	double result = devops.calculate();
 
 	if (std::abs(result) < 1)
 	{
