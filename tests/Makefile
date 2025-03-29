@@ -96,9 +96,7 @@ DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-am__dirstamp = $(am__leading_dot)dirstamp
-am_devopstest1_OBJECTS = main.$(OBJEXT) \
-	$(top_builddir)/FuncA.$(OBJEXT)
+am_devopstest1_OBJECTS = main.$(OBJEXT) FuncA.$(OBJEXT)
 devopstest1_OBJECTS = $(am_devopstest1_OBJECTS)
 devopstest1_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -116,9 +114,12 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = $(top_builddir)/$(DEPDIR)/FuncA.Po \
-	./$(DEPDIR)/main.Po
+am__depfiles_remade = ./$(DEPDIR)/FuncA.Po ./$(DEPDIR)/main.Po
 am__mv = mv -f
+AM_V_lt = $(am__v_lt_$(V))
+am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
+am__v_lt_0 = --silent
+am__v_lt_1 = 
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 AM_V_CXX = $(am__v_CXX_$(V))
@@ -503,14 +504,6 @@ $(am__aclocal_m4_deps):
 
 clean-checkPROGRAMS:
 	-test -z "$(check_PROGRAMS)" || rm -f $(check_PROGRAMS)
-$(top_builddir)/$(am__dirstamp):
-	@$(MKDIR_P) $(top_builddir)
-	@: > $(top_builddir)/$(am__dirstamp)
-$(top_builddir)/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) $(top_builddir)/$(DEPDIR)
-	@: > $(top_builddir)/$(DEPDIR)/$(am__dirstamp)
-$(top_builddir)/FuncA.$(OBJEXT): $(top_builddir)/$(am__dirstamp) \
-	$(top_builddir)/$(DEPDIR)/$(am__dirstamp)
 
 devopstest1$(EXEEXT): $(devopstest1_OBJECTS) $(devopstest1_DEPENDENCIES) $(EXTRA_devopstest1_DEPENDENCIES) 
 	@rm -f devopstest1$(EXEEXT)
@@ -518,12 +511,11 @@ devopstest1$(EXEEXT): $(devopstest1_OBJECTS) $(devopstest1_DEPENDENCIES) $(EXTRA
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
-	-rm -f $(top_builddir)/*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
 
-include $(top_builddir)/$(DEPDIR)/FuncA.Po # am--include-marker
+include ./$(DEPDIR)/FuncA.Po # am--include-marker
 include ./$(DEPDIR)/main.Po # am--include-marker
 
 $(am__depfiles_remade):
@@ -533,20 +525,32 @@ $(am__depfiles_remade):
 am--depfiles: $(am__depfiles_remade)
 
 .cpp.o:
-	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
-	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
-	$(am__mv) $$depbase.Tpo $$depbase.Po
+	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
 #	$(AM_V_CXX)source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ $<
 
 .cpp.obj:
-	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
-	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
-	$(am__mv) $$depbase.Tpo $$depbase.Po
+	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
 #	$(AM_V_CXX)source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+FuncA.o: $(top_builddir)/FuncA.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT FuncA.o -MD -MP -MF $(DEPDIR)/FuncA.Tpo -c -o FuncA.o `test -f '$(top_builddir)/FuncA.cpp' || echo '$(srcdir)/'`$(top_builddir)/FuncA.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/FuncA.Tpo $(DEPDIR)/FuncA.Po
+#	$(AM_V_CXX)source='$(top_builddir)/FuncA.cpp' object='FuncA.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o FuncA.o `test -f '$(top_builddir)/FuncA.cpp' || echo '$(srcdir)/'`$(top_builddir)/FuncA.cpp
+
+FuncA.obj: $(top_builddir)/FuncA.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT FuncA.obj -MD -MP -MF $(DEPDIR)/FuncA.Tpo -c -o FuncA.obj `if test -f '$(top_builddir)/FuncA.cpp'; then $(CYGPATH_W) '$(top_builddir)/FuncA.cpp'; else $(CYGPATH_W) '$(srcdir)/$(top_builddir)/FuncA.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/FuncA.Tpo $(DEPDIR)/FuncA.Po
+#	$(AM_V_CXX)source='$(top_builddir)/FuncA.cpp' object='FuncA.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o FuncA.obj `if test -f '$(top_builddir)/FuncA.cpp'; then $(CYGPATH_W) '$(top_builddir)/FuncA.cpp'; else $(CYGPATH_W) '$(srcdir)/$(top_builddir)/FuncA.cpp'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -830,8 +834,6 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
-	-test -z "$(top_builddir)/$(DEPDIR)/$(am__dirstamp)" || rm -f $(top_builddir)/$(DEPDIR)/$(am__dirstamp)
-	-test -z "$(top_builddir)/$(am__dirstamp)" || rm -f $(top_builddir)/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -841,7 +843,7 @@ clean: clean-am
 clean-am: clean-checkPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
-		-rm -f $(top_builddir)/$(DEPDIR)/FuncA.Po
+		-rm -f ./$(DEPDIR)/FuncA.Po
 	-rm -f ./$(DEPDIR)/main.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
@@ -888,7 +890,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f $(top_builddir)/$(DEPDIR)/FuncA.Po
+		-rm -f ./$(DEPDIR)/FuncA.Po
 	-rm -f ./$(DEPDIR)/main.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
