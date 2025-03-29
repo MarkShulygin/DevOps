@@ -1,14 +1,15 @@
 AUTOMAKE_OPTIONS = foreign
 bin_PROGRAMS = devops
-devops_SOURCES = main.cpp FuncA.cpp FuncA.h
+devops_SOURCES = main.cpp FuncA.cpp FuncA.h HTTP_Server.cpp
 dist_man_MANS = devops.1
 
-SUBDIR = tests
+SUBDIRS = tests
 
 CTRLF_DIR=$(CURDIR)/deb/DEBIAN
 CTRLF_NAME=$(CTRLF_DIR)/control
 
 .PHONY: deb debug
+
 deb:
 	mkdir -p $(CTRLF_DIR)
 	echo Package: $(PACKAGE) > $(CTRLF_NAME)
