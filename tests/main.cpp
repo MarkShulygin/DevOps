@@ -5,10 +5,10 @@
 
 int main()
 {
-	FuncA devops;
-	double result = devops.calculate();
+	FuncA func;
+	double result = func.calculate();
 
-	if (std::abs(result) < 2)
+	if (std::abs(result) < 1)
 	{
 		std::cout << "Calculated succesfully";
 	} else {
