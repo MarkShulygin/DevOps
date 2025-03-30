@@ -7,30 +7,22 @@
 
 int main() {
     FuncA func;
-    const int count = 27000000;
-
-    std::vector<double> values(count);
-
     auto start = std::chrono::high_resolution_clock::now();
 
-    for (int i = 0; i < count; i++) {
-        values[i] = func.calculate();
-    }
-
-
-    std::sort(values.begin(), values.end());
+    // curl запрос
+    int result = system("curl -s http://localhost:8081/compute > /dev/null");
 
     auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed = end - start;
+    double seconds = std::chrono::duration<double>(end - start).count();
 
-    double seconds = elapsed.count();
-    std::cout << "Execution time: " << seconds << " seconds\n";
+    std::cout << "Request + server execution time: " << seconds << " seconds\n";
 
     if (seconds >= 5.0 && seconds <= 20.0) {
-        std::cout << " Test passed: time in [5-20] sec\n";
+        std::cout << "✅ Server passed time check\n";
         return 0;
     } else {
-        std::cout << " Test failed: time out of range\n";
+        std::cout << "❌ Server too slow/fast\n";
         return 1;
     }
 }
+
