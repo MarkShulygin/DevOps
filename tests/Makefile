@@ -97,7 +97,7 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__dirstamp = $(am__leading_dot)dirstamp
-am_time_test_OBJECTS = main.$(OBJEXT) $(top_builddir)/FuncA.$(OBJEXT)
+am_time_test_OBJECTS = main.$(OBJEXT) ../FuncA.$(OBJEXT)
 time_test_OBJECTS = $(am_time_test_OBJECTS)
 time_test_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -115,8 +115,7 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = $(top_builddir)/$(DEPDIR)/FuncA.Po \
-	./$(DEPDIR)/main.Po
+am__depfiles_remade = ../$(DEPDIR)/FuncA.Po ./$(DEPDIR)/main.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -465,7 +464,7 @@ top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 AUTOMAKE_OPTIONS = foreign
-time_test_SOURCES = main.cpp $(top_builddir)/FuncA.cpp $(top_builddir)/FuncA.h
+time_test_SOURCES = main.cpp ../FuncA.cpp ../FuncA.h
 all: all-am
 
 .SUFFIXES:
@@ -502,14 +501,13 @@ $(am__aclocal_m4_deps):
 
 clean-checkPROGRAMS:
 	-test -z "$(check_PROGRAMS)" || rm -f $(check_PROGRAMS)
-$(top_builddir)/$(am__dirstamp):
-	@$(MKDIR_P) $(top_builddir)
-	@: > $(top_builddir)/$(am__dirstamp)
-$(top_builddir)/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) $(top_builddir)/$(DEPDIR)
-	@: > $(top_builddir)/$(DEPDIR)/$(am__dirstamp)
-$(top_builddir)/FuncA.$(OBJEXT): $(top_builddir)/$(am__dirstamp) \
-	$(top_builddir)/$(DEPDIR)/$(am__dirstamp)
+../$(am__dirstamp):
+	@$(MKDIR_P) ..
+	@: > ../$(am__dirstamp)
+../$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ../$(DEPDIR)
+	@: > ../$(DEPDIR)/$(am__dirstamp)
+../FuncA.$(OBJEXT): ../$(am__dirstamp) ../$(DEPDIR)/$(am__dirstamp)
 
 time_test$(EXEEXT): $(time_test_OBJECTS) $(time_test_DEPENDENCIES) $(EXTRA_time_test_DEPENDENCIES) 
 	@rm -f time_test$(EXEEXT)
@@ -517,12 +515,12 @@ time_test$(EXEEXT): $(time_test_OBJECTS) $(time_test_DEPENDENCIES) $(EXTRA_time_
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
-	-rm -f $(top_builddir)/*.$(OBJEXT)
+	-rm -f ../*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
 
-include $(top_builddir)/$(DEPDIR)/FuncA.Po # am--include-marker
+include ../$(DEPDIR)/FuncA.Po # am--include-marker
 include ./$(DEPDIR)/main.Po # am--include-marker
 
 $(am__depfiles_remade):
@@ -829,8 +827,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
-	-test -z "$(top_builddir)/$(DEPDIR)/$(am__dirstamp)" || rm -f $(top_builddir)/$(DEPDIR)/$(am__dirstamp)
-	-test -z "$(top_builddir)/$(am__dirstamp)" || rm -f $(top_builddir)/$(am__dirstamp)
+	-rm -f ../$(DEPDIR)/$(am__dirstamp)
+	-rm -f ../$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -840,7 +838,7 @@ clean: clean-am
 clean-am: clean-checkPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
-		-rm -f $(top_builddir)/$(DEPDIR)/FuncA.Po
+		-rm -f ../$(DEPDIR)/FuncA.Po
 	-rm -f ./$(DEPDIR)/main.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
@@ -887,7 +885,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f $(top_builddir)/$(DEPDIR)/FuncA.Po
+		-rm -f ../$(DEPDIR)/FuncA.Po
 	-rm -f ./$(DEPDIR)/main.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic

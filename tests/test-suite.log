@@ -15,7 +15,12 @@
 FAIL: time_test
 ===============
 
-Request + server execution time: 0.00974667 seconds
-Server too slow/fast
+execl failed: No such file or directory
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (7) Failed to connect to 127.0.0.1 port 8081 after 0 ms: Connection refused
+Request + server execution time: 0.0182626 seconds
+Server too slow/fast or curl failed
 FAIL time_test (exit status: 1)
 
