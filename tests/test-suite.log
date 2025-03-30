@@ -3,12 +3,19 @@
 ======================================
 
 # TOTAL: 1
-# PASS:  1
+# PASS:  0
 # SKIP:  0
 # XFAIL: 0
-# FAIL:  0
+# FAIL:  1
 # XPASS: 0
 # ERROR: 0
 
 .. contents:: :depth: 2
+
+FAIL: time_test
+===============
+
+Request + server execution time: 0.0214925 seconds
+Server too slow/fast
+FAIL time_test (exit status: 1)
 
