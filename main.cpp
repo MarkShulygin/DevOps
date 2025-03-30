@@ -2,11 +2,6 @@
 #include <stdio.h>
 #include "FuncA.h"
 
-int main() {
-	
-};
-
-
 extern int CreateHTTPserver();
 
 int main() {
