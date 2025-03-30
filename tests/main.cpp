@@ -18,10 +18,10 @@ int main() {
     std::cout << "Request + server execution time: " << seconds << " seconds\n";
 
     if (seconds >= 5.0 && seconds <= 20.0) {
-        std::cout << "✅ Server passed time check\n";
+        std::cout << "Server passed time check\n";
         return 0;
     } else {
-        std::cout << "❌ Server too slow/fast\n";
+        std::cout << "Server too slow/fast\n";
         return 1;
     }
 }
