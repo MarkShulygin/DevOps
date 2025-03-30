@@ -85,8 +85,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-check_PROGRAMS = devopstest1$(EXEEXT)
-TESTS = devopstest1$(EXEEXT)
+check_PROGRAMS = time_test$(EXEEXT)
+TESTS = time_test$(EXEEXT)
 subdir = tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -97,10 +97,9 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__dirstamp = $(am__leading_dot)dirstamp
-am_devopstest1_OBJECTS = main.$(OBJEXT) \
-	$(top_builddir)/FuncA.$(OBJEXT)
-devopstest1_OBJECTS = $(am_devopstest1_OBJECTS)
-devopstest1_LDADD = $(LDADD)
+am_time_test_OBJECTS = main.$(OBJEXT) $(top_builddir)/FuncA.$(OBJEXT)
+time_test_OBJECTS = $(am_time_test_OBJECTS)
+time_test_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -144,8 +143,8 @@ AM_V_CCLD = $(am__v_CCLD_$(V))
 am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(devopstest1_SOURCES)
-DIST_SOURCES = $(devopstest1_SOURCES)
+SOURCES = $(time_test_SOURCES)
+DIST_SOURCES = $(time_test_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -466,7 +465,7 @@ top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 AUTOMAKE_OPTIONS = foreign
-devopstest1_SOURCES = main.cpp $(top_builddir)/FuncA.cpp $(top_builddir)/FuncA.h
+time_test_SOURCES = main.cpp $(top_builddir)/FuncA.cpp $(top_builddir)/FuncA.h
 all: all-am
 
 .SUFFIXES:
@@ -512,9 +511,9 @@ $(top_builddir)/$(DEPDIR)/$(am__dirstamp):
 $(top_builddir)/FuncA.$(OBJEXT): $(top_builddir)/$(am__dirstamp) \
 	$(top_builddir)/$(DEPDIR)/$(am__dirstamp)
 
-devopstest1$(EXEEXT): $(devopstest1_OBJECTS) $(devopstest1_DEPENDENCIES) $(EXTRA_devopstest1_DEPENDENCIES) 
-	@rm -f devopstest1$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(devopstest1_OBJECTS) $(devopstest1_LDADD) $(LIBS)
+time_test$(EXEEXT): $(time_test_OBJECTS) $(time_test_DEPENDENCIES) $(EXTRA_time_test_DEPENDENCIES) 
+	@rm -f time_test$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(time_test_OBJECTS) $(time_test_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -741,9 +740,9 @@ recheck: all $(check_PROGRAMS)
 	        am__force_recheck=am--force-recheck \
 	        TEST_LOGS="$$log_list"; \
 	exit $$?
-devopstest1.log: devopstest1$(EXEEXT)
-	@p='devopstest1$(EXEEXT)'; \
-	b='devopstest1'; \
+time_test.log: time_test$(EXEEXT)
+	@p='time_test$(EXEEXT)'; \
+	b='time_test'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
