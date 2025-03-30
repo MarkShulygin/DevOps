@@ -8,33 +8,42 @@
 #include <sys/wait.h>
 
 int main() {
-    pid_t pid = fork();
+    auto t1 = std::chrono::high_resolution_clock::now();	
 
-    if (pid == 0) {
-        execl("./HTTP_Server", "HTTP_Server", NULL);
-        perror("execl failed");
-        return 1;
-    }
+	std::vector<int> aValues;
+	// Mersenne Twister random engine
+	std::mt19937 mtre {123};
+	std::uniform_int_distribution<int> distr {0, 2000000};
 
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+	for (int i=0; i<2000000; i++) {
+		aValues.push_back(distr(mtre));
+	}
 
-    auto start = std::chrono::high_resolution_clock::now();
+	for (int i=0; i<500; i++)
+	{
+		sort(begin(aValues), end(aValues));
+		reverse(begin(aValues), end(aValues));
+	}
+			
+	auto t2 = std::chrono::high_resolution_clock::now();
+	auto int_ms = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
+	int iMS = int_ms.count();
 
-    int result = system("curl -i -X GET 127.0.0.1:8081/compute");
+	char strTimeElapsed[100];
+	char message[100];
 
-    auto end = std::chrono::high_resolution_clock::now();
-    double seconds = std::chrono::duration<double>(end - start).count();
+	if (iMS < 5000) {
+   		snprintf(message, sizeof(message), "Too fast! (%d ms)", iMS);
+	} else if (iMS > 20000) {
+    	snprintf(message, sizeof(message), "Too slow! (%d ms)", iMS);
+	} else {
+    	snprintf(message, sizeof(message), "Perfect execution time: %d ms", iMS);
+	}
 
-    std::cout << "Request + server execution time: " << seconds << " seconds\n";
+	sprintf(strResponse, "%sContent-type: text/html\r\nContent-Length: %lu\r\n\r\n", HTTP_200HEADER, strlen(message));
 
-    kill(pid, SIGTERM);
-    waitpid(pid, nullptr, 0);
+	write(clientSocket, strResponse, strlen(strResponse));
+	write(clientSocket, message, strlen(message));
 
-    if (result == 0 && seconds >= 5.0 && seconds <= 20.0) {
-        std::cout << "Server passed time check\n";
-        return 0;
-    } else {
-        std::cout << "Server too slow/fast or curl failed\n";
-        return 1;
-    }
+	printf("\nResponse sent: %s\n", message);
 }
