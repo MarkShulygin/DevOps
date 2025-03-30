@@ -10,7 +10,7 @@ int main() {
     auto start = std::chrono::high_resolution_clock::now();
 
     // curl запрос
-    int result = system("curl -s http://localhost:8081/compute > /dev/null");
+    int result = system("curl -s http://localhost:8081/compute");
 
     auto end = std::chrono::high_resolution_clock::now();
     double seconds = std::chrono::duration<double>(end - start).count();
