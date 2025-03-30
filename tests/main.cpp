@@ -8,42 +8,40 @@
 #include <sys/wait.h>
 
 int main() {
-    auto t1 = std::chrono::high_resolution_clock::now();	
+    auto start = std::chrono::high_resolution_clock::now();
 
-	std::vector<int> aValues;
-	// Mersenne Twister random engine
-	std::mt19937 mtre {123};
-	std::uniform_int_distribution<int> distr {0, 2000000};
+    std::vector<int> aValues;
+    std::mt19937 mtre(123); 
+    std::uniform_int_distribution<int> distr(0, 2000000);
 
-	for (int i=0; i<2000000; i++) {
-		aValues.push_back(distr(mtre));
-	}
+    for (int i = 0; i < 2000000; i++) {
+        aValues.push_back(distr(mtre));
+    }
 
-	for (int i=0; i<500; i++)
-	{
-		sort(begin(aValues), end(aValues));
-		reverse(begin(aValues), end(aValues));
-	}
-			
-	auto t2 = std::chrono::high_resolution_clock::now();
-	auto int_ms = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-	int iMS = int_ms.count();
+    for (int i = 0; i < 500; i++) {
+        std::sort(aValues.begin(), aValues.end());
+        std::reverse(aValues.begin(), aValues.end());
+    }
 
-	char strTimeElapsed[100];
-	char message[100];
+    auto end = std::chrono::high_resolution_clock::now();
+    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    int iMS = elapsed.count();
 
-	if (iMS < 5000) {
-   		snprintf(message, sizeof(message), "Too fast! (%d ms)", iMS);
-	} else if (iMS > 20000) {
-    	snprintf(message, sizeof(message), "Too slow! (%d ms)", iMS);
-	} else {
-    	snprintf(message, sizeof(message), "Perfect execution time: %d ms", iMS);
-	}
+    std::cout << "⏱ Execution time: " << iMS << " ms\n";
 
-	sprintf(strResponse, "%sContent-type: text/html\r\nContent-Length: %lu\r\n\r\n", HTTP_200HEADER, strlen(message));
+    if (iMS < 5000) {
+        std::cout << "Too fast! (< 5 sec)\n";
+        return 1;
+    } else if (iMS > 20000) {
+        std::cout << "Too slow! (> 20 sec)\n";
+        return 1;
+    } else {
+        std::cout << "Perfect execution time!\n";
+	return 0;
+    }
 
-	write(clientSocket, strResponse, strlen(strResponse));
-	write(clientSocket, message, strlen(message));
+    FuncA func;
+    double result = func.calculate();
 
-	printf("\nResponse sent: %s\n", message);
+    return 0;
 }
