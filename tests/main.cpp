@@ -1,11 +1,13 @@
+#include <stdio.h>
 #include <iostream>
+#include <vector>
 #include <chrono>
-#include <cstdlib>
-#include <thread>
-#include <csignal>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include <algorithm>
+#include <random>
+#include <cmath>
+
+#include "../FuncA.h"
+#include "../FuncA.cpp"
 
 int main() {
     auto start = std::chrono::high_resolution_clock::now();
