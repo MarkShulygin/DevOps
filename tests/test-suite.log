@@ -3,24 +3,12 @@
 ======================================
 
 # TOTAL: 1
-# PASS:  0
+# PASS:  1
 # SKIP:  0
 # XFAIL: 0
-# FAIL:  1
+# FAIL:  0
 # XPASS: 0
 # ERROR: 0
 
 .. contents:: :depth: 2
-
-FAIL: time_test
-===============
-
-execl failed: No such file or directory
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-curl: (7) Failed to connect to 127.0.0.1 port 8081 after 0 ms: Connection refused
-Request + server execution time: 0.0182626 seconds
-Server too slow/fast or curl failed
-FAIL time_test (exit status: 1)
 

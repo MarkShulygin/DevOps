@@ -7,7 +7,6 @@
 #include <cmath>
 
 #include "../FuncA.h"
-#include "../FuncA.cpp"
 
 int main() {
     auto start = std::chrono::high_resolution_clock::now();
