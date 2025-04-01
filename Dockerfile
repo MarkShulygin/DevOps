@@ -2,7 +2,6 @@ FROM alpine AS build
 RUN apk add --no-cache build-base automake autoconf perl git
 RUN git clone https://github.com/MarkShulygin/DevOps.git /src
 WORKDIR /src
-RUN automake --add-missing
 RUN ./configure
 RUN make
 
