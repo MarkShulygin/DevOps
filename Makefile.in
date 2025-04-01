@@ -962,7 +962,6 @@ uninstall-man: uninstall-man1
 
 .PRECIOUS: Makefile
 
-devops_LDFLAGS -static
 
 .PHONY: deb debug
 
