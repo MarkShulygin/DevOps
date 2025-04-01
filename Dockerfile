@@ -8,5 +8,5 @@ RUN make
 
 FROM alpine
 RUN apk add --no-cache libstdc++
-COPY --from=build /src/devops /usr/local/bin/devops
+COPY --from=build /src/funcA.elf /usr/local/bin/devops
 ENTRYPOINT ["/usr/local/bin/devops"]
