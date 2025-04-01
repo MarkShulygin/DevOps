@@ -1,7 +1,8 @@
-FROM alpine
+FROM alpine AS build
 RUN apk add --no-cache build-base automake autoconf
 WORKDIR /home/ubuntu/DevOps/DevOps
 COPY . .
+RUN autoreconf -i
 RUN ./configure
 RUN make
 
