@@ -2,11 +2,11 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ "branchHTTPServer" ]
+    branches: [ "branchHTTPservMulti" ]
   pull_request:
-    branches: [ "branchHTTPServer" ]
+    branches: [ "branchHTTPservMulti" ]
   workflow_dispatch:
-    branches: [ "branchHTTPServer" ]
+    branches: [ "branchHTTPservMulti" ]
 
 jobs:
   build:
@@ -15,6 +15,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      
       - name: ./configure
         run: ./configure
 
@@ -26,13 +33,10 @@ jobs:
 
       - name: Run distcheck
         run: make distcheck
+
+      - name: build ls
+        run: docker buildx ls
         
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
