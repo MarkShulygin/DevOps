@@ -4,7 +4,7 @@ WORKDIR /home/ubuntu/DevOps/DevOps
 COPY . .
 RUN autoreconf -i
 RUN ./configure
-RUN make
+RUN gmake
 
 FROM alpine
 COPY --from=build /home/ubuntu/DevOps/DevOps /usr/local/bin/devops
