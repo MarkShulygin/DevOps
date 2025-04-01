@@ -1,7 +1,7 @@
 AUTOMAKE_OPTIONS = foreign
 bin_PROGRAMS = devops
 devops_SOURCES = main.cpp FuncA.cpp FuncA.h HTTP_Server.cpp
-devops_LDFLAGS -static
+devops_LDFLAGS = -static
 dist_man_MANS = devops.1
 
 SUBDIRS = tests
