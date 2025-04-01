@@ -8,7 +8,7 @@ make_request() {
 }
 
 while true; do
-    RANDOM_DELAY=$((RANDOM % 3 + 4))
+    RANDOM_DELAY=$((RANDOM % 6 + 5))
     make_request &
     sleep $RANDOM_DELAY
 done

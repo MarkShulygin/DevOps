@@ -105,6 +105,8 @@ am_devops_OBJECTS = main.$(OBJEXT) FuncA.$(OBJEXT) \
 	HTTP_Server.$(OBJEXT)
 devops_OBJECTS = $(am_devops_OBJECTS)
 devops_LDADD = $(LDADD)
+devops_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(devops_LDFLAGS) \
+	$(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -358,6 +360,7 @@ top_builddir = .
 top_srcdir = .
 AUTOMAKE_OPTIONS = foreign
 devops_SOURCES = main.cpp FuncA.cpp FuncA.h HTTP_Server.cpp
+devops_LDFLAGS = -static
 dist_man_MANS = devops.1
 SUBDIRS = tests
 CTRLF_DIR = $(CURDIR)/deb/DEBIAN
@@ -444,7 +447,7 @@ clean-binPROGRAMS:
 
 devops$(EXEEXT): $(devops_OBJECTS) $(devops_DEPENDENCIES) $(EXTRA_devops_DEPENDENCIES) 
 	@rm -f devops$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(devops_OBJECTS) $(devops_LDADD) $(LIBS)
+	$(AM_V_CXXLD)$(devops_LINK) $(devops_OBJECTS) $(devops_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)

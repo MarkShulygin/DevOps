@@ -43,7 +43,7 @@ launch_container() {
         return 0
     fi
     log_message "Launching container: $name on CPU core $cpu_core and port $port"
-    if ! docker run --name "$name" --cpuset-cpus="$cpu_core" -p "$port":8081 --rm -d "$IMAGE" >/dev/null 2>&1; then
+    if ! docker run --name "$name" --cpuset-cpus="$cpu_core" -p "$port":8080 -d "$IMAGE" >/dev/null 2>&1; then
         log_message "Error: Failed to start container $name"
         return 1
     fi
