@@ -33,4 +33,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -f ./Dockerfile -t markshukyhin/devops .
+          docker buildx build \
+          --platform linux/amd64,linux/arm64 \
+          -t markshukhyhin/devops:latest \
+          --push .
