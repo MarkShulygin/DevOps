@@ -133,8 +133,10 @@ monitor_containers() {
             if is_busy "$container"; then
                 container_status["$container"]="busy"
                 log_message "Container $container is busy with CPU usage ${container_cpu_usage[$container]}%."
-                if [[ "$container" == "srv1" && ${container_status["srv1"]} == "busy" && ! $(docker ps --format '{{.Names}}' | grep -q "srv2") ]]; then
-                    launch_container "srv2" 1 8081
+                if [[ "$container" == "srv1" && ${container_status["srv1"]} == "busy" ]]; then
+                    if ! docker ps --format '{{.Names}}' | grep -q "srv2"; then
+                        launch_container "srv2" 1 8081
+                    fi
                 elif [[ "$container" == "srv2" && ${container_status["srv2"]} == "busy" && ! $(docker ps --format '{{.Names}}' | grep -q "srv3") ]]; then
                     launch_container "srv3" 2 8082
                 fi
