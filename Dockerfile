@@ -1,8 +1,11 @@
 FROM alpine AS build
-RUN apk add --no-cache build-base automake autoconf
-WORKDIR /home/ubuntu/DevOps/DevOps
+RUN apk add --no-cache build-base automake autoconf perl git
+RUN git clone https://github.com/MarkShulygin/DevOps.git /src
+WORKDIR /src
 COPY . .
-RUN autoreconf -i
+RUN aclocal
+RUN autoconf
+RUN automake --add-missing
 RUN ./configure
 RUN make
 
