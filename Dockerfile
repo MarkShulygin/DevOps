@@ -1,12 +1,6 @@
-FROM alpine AS build
-RUN apk add --no-cache build-base automake autoconf
-WORKDIR /home/ubuntu/DevOps/DevOps
-COPY . .
-RUN autoreconf -i
-RUN ./configure
-RUN gmake
-
 FROM alpine
-COPY --from=build /home/ubuntu/DevOps/DevOps /usr/local/bin/devops
-ENTRYPOINT ["/usr/local/bin/devops"]
-
+WORKDIR /home/ubuntu/DevOps/DevOps
+COPY ./devops .
+RUN apk add libstdc++
+RUN apk add libc6-compat
+ENTRYPOINT ["./devops"]
