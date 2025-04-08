@@ -21,12 +21,6 @@ jobs:
       - name: Log in to the Container registry
         run: docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build dockerfile
-        run: docker build --platform=linux/amd64 -t markshukyhin/optimadevops:amd64 --push .
-
-      - name: Run amd64 container
-        run: docker run --rm markshukyhin/optimadevops:amd64
-
       - name: QEMU install
         uses: docker/setup-qemu-action@v3
 
@@ -35,6 +29,9 @@ jobs:
 
       - name: build ls
         run: docker buildx ls
+        
+      - name: Build dockerfile
+        run: docker build --platform=linux/amd64 -t markshukyhin/optimadevops:amd64 --push .
 
       - name: Build dockerfile
         run: docker build --platform=linux/arm64 -t markshukyhin/optimadevops:arm64 --push .
