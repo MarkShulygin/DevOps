@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Log in to the Container registry
-        run: docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+        run: docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build dockerfile
         run: docker build --platform=linux/amd64 -t markshukyhin/optimadevops:amd64 --push .
