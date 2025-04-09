@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: C/C++ CI and Docker Multiarch Build
 
 on:
   push:
@@ -6,14 +6,15 @@ on:
   pull_request:
     branches: [ "branchHTTPservMulti" ]
   workflow_dispatch:
-    branches: [ "branchHTTPservMulti" ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
       - name: Install build dependencies
         run: |
           sudo apt-get update
@@ -22,23 +23,25 @@ jobs:
       - name: QEMU install
         uses: docker/setup-qemu-action@v3
 
-      - name: Install Docker Buildx
-        uses: docker/setup-buildx-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-      - name: build ls
-        run: docker buildx ls
-
-      - name: Log in to the Container registry
-        run: docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build Dockerfile image for amd64
-        run: docker build --platform=linux/amd64 -t markshukyhin/httpserver:amd64 --push .
+        run: docker buildx build --platform linux/amd64 -t markshukyhin/httpserver:amd64 --push .
 
       - name: Build Dockerfile image for arm64
-        run: docker build --platform=linux/arm64 -t markshukyhin/httpserver:arm64 --push .
+        run: docker buildx build --platform linux/arm64 -t markshukyhin/httpserver:arm64 --push .
 
       - name: Create manifest
-        run: docker manifest create markshukyhin/httpserver --amend markshukyhin/httpserver:amd64 --amend markshukyhin/httpserver:arm64
+        run: docker manifest create markshukyhin/httpserver:latest \
+              --amend markshukyhin/httpserver:amd64 \
+              --amend markshukyhin/httpserver:arm64
 
-      - name: Push manifest to docker hub
-        run: docker manifest push markshukyhin/httpserver
+      - name: Push manifest to Docker Hub
+        run: docker manifest push markshukyhin/httpserver:latest
