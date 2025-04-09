@@ -20,7 +20,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y autoconf automake g++ libboost-test-dev
 
-      - name: QEMU install
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
@@ -32,17 +32,11 @@ jobs:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build Dockerfile image for amd64
-        run: docker buildx build --platform linux/amd64 -t markshukyhin/httpserver:amd64 --push .
-
-      - name: Build Dockerfile image for arm64
-        run: docker buildx build --platform linux/arm64 -t markshukyhin/httpserver:arm64 --push .
-
-      - name: Create manifest
-        run: |
-          docker manifest create markshukyhin/httpserver:latest \
-            --amend markshukyhin/httpserver:amd64 \
-            --amend markshukyhin/httpserver:arm64
-
-      - name: Push manifest to Docker Hub
-        run: docker manifest push markshukyhin/httpserver:latest
+      - name: Build and push multiarch image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: markshukyhin/httpserver:latest
+          platforms: linux/amd64,linux/arm64
