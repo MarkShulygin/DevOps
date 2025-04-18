@@ -28,14 +28,17 @@ jobs:
       - name: build ls
         run: docker buildx ls
         
+      - name: Build dockerfile
+        run: docker build --platform=linux/amd64 -t markshukyhin/optimadevops:amd64 --push .
+
+      - name: Build dockerfile
+        run: docker build --platform=linux/arm64 -t markshukyhin/optimadevops:arm64 --push .
+
       - name: list images
         run: docker image ls
   
-      - name: Build and push multiarch image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: markshukyhin/httpserver:latest
-          platforms: linux/amd64,linux/arm64
+      - name: create manifest
+        run: docker manifest create markshukyhin/optimadevops --amend markshukyhin/optimadevops:amd64 --amend markshukyhin/optimadevops:arm64
+
+      - name: Push manifest to docker hub
+        run: docker manifest push markshukyhin/optimadevops
